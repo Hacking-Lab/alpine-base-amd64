@@ -10,17 +10,27 @@ This is the alpine base image of the Hacking-Lab CTF system
 * with `file` based dynamic ctf flag handling
 
 ## Build & Test
-1. `bash build.sh`
-2. `docker-compose up`
-3. base image is not providing any service
+1. `docker-compose up --build`
 
 ## USER SETTINGS
 You can define the user that will being created in the docker. Please define these env variables in the docker-compose.yml file
 
-* HL_USER_USERNAME=????
-* HL_USER_PASSWORD=????
-* HL_ROOT_PASSWORD=????
+* HL_USER_USERNAME=hacker
+* HL_USER_PASSWORD=compass
+* HL_ROOT_PASSWORD=very_secure
 
+```
+version: '3.6'
+
+services:
+  alpine-base-amd64:
+    build: .
+    image: hackinglab/alpine-base-amd64:3.2
+    environment:
+      - HL_USER_USERNAME=hacker
+      - HL_USER_PASSWORD=compass
+      - HL_ROOT_PASSWORD=<change-me>
+```
 
 If you do not set these env variables, the base image will create the user "hacker" with the uid 2000 and random passwords (for both, hacker and root)
 
